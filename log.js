@@ -1,5 +1,5 @@
 var cv, cv2, ctx2, ctx, fondo, fondo2, objetos, nave, p, imP, disparos, controles;
-var disparosEn, vidaE, jugando, direccion, espera, py, numEsp, boton, MejorPuntuacion;
+var disparosEn, vidaE, jugando, direccion, espera, py, numEsp, boton, MejorPuntuacion, temDisparoAliado;
 
 MejorPuntuacion=0; //asignar lo que se tenga guardado antes....
 this.controles = this.document.createElement('img');
@@ -64,6 +64,7 @@ function actualizar(){
     animaEnemigo();//efecto animacion enemigos
     crearProyectilEnemigo();
 
+    disparar();
     proyectil();//colicion y animacion de proyectiles aliados
     proyectilEnemigo();//colicion y animacion de proyectiles enemigos
 
@@ -112,16 +113,7 @@ document.onkeydown = function(event){
     if(event.which==65)
         if(p[0].x > 40)
             p[0].x= p[0].x -10;
-       
-    if(event.which==32){
-        disparos.push({
-            x:p[0].x+15,
-            y:p[0].y+15,
-            width: 10,
-            height:17
-        });
-
-    }
+     
 
 }
 
@@ -211,6 +203,29 @@ function proyectilEnemigo(){
 
 }
 
+//--- diparo automatico del aliado
+
+function disparar(){
+
+    if(temDisparoAliado==10){
+
+        disparos.push({
+            x:p[0].x+15,
+            y:p[0].y+15,
+            width: 10,
+            height:17
+        });
+        temDisparoAliado=0;
+
+    }else{
+
+        temDisparoAliado+=1;
+
+    }
+
+
+}
+
 
 //---------------------------------funcion movimiento de los proyectiles aliados, y colicion contra naves enemigas
 function proyectil(){
@@ -294,7 +309,7 @@ window.onload = function() {
     this.numEsp=150;//espera en lanzamiento de proyectil enemigo
     this.espera=0;
 
-    
+    this.temDisparoAliado=0;//contador para el tiempo del disparo aliado 
     
     cv = document.getElementById('lienzo');
     ctx = cv.getContext('2d');
@@ -347,4 +362,3 @@ window.onload = function() {
     this.dibControles();
     this.actualizar();
 };
-

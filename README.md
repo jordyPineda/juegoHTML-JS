@@ -1,4 +1,5 @@
 # juegoHTML-JS
 
--jordy esteban pineda-20172020119.
--asdasd
+## jordy esteban pineda-20172020119.
+## Daniel aksjdhaksjd
+## David askjdhk
